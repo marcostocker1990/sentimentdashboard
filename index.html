@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sentiment Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <div class="max-w-5xl mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-4">Tägliches Sentiment-Dashboard (S&P 500)</h1>
+
+    <!-- Investing.com Economic Calendar Widget -->
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold mb-2">Wirtschaftskalender</h2>
+      <iframe src="https://sslecal2.investing.com?ecoDayBackground=%23ffffff&amp;columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&amp;category=_employment,_economicActivity,_inflation,_credit,_centralBanks,_confidenceIndex,_balance,_Bonds&amp;importance=2,3&amp;features=datepicker&amp;countries=72,12,5&amp;calType=day&amp;timeZone=16&amp;lang=1" width="100%" height="467" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe>
+      <div class="text-xs text-gray-600 mt-1">Real Time Economic Calendar provided by <a href="https://www.investing.com/" rel="nofollow" target="_blank" class="text-blue-600 font-semibold underline">Investing.com</a></div>
+    </div>
+
+    <!-- VIX Widget -->
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold mb-2">VIX (CBOE Volatility Index)</h2>
+      <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=qKzZ&width=670&height=400" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
+    </div>
+
+    <!-- Fear & Greed Index Widget -->
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold mb-2">Fear &amp; Greed Index</h2>
+      <iframe src="https://production.dataviz.cnn.io/fearandgreed/" width="100%" height="200" frameborder="0"></iframe>
+    </div>
+
+    <!-- TradingView Widgets (ausser VIX) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <div>
+        <h2 class="text-lg font-semibold mb-1">Put/Call Ratio</h2>
+        <iframe src="https://www.tradingview.com/embed-widget/mini-symbol-overview/?symbol=INDEX:PCALL" width="100%" height="220" frameborder="0"></iframe>
+      </div>
+      <div>
+        <h2 class="text-lg font-semibold mb-1">TRIN (ARMS)</h2>
+        <iframe src="https://www.tradingview.com/embed-widget/mini-symbol-overview/?symbol=AMEX:TRIN" width="100%" height="220" frameborder="0"></iframe>
+      </div>
+      <div>
+        <h2 class="text-lg font-semibold mb-1">NYSE TICK (Platzhalter)</h2>
+        <img src="tick_screenshot.png" alt="NYSE TICK" class="w-full h-auto border rounded">
+      </div>
+      <div>
+        <h2 class="text-lg font-semibold mb-1">% SPX über 20-Tage MA</h2>
+        <img src="spx_20ma.png" alt="SPX 20MA" class="w-full h-auto border rounded">
+      </div>
+      <div>
+        <h2 class="text-lg font-semibold mb-1">% SPX über 50-Tage MA</h2>
+        <img src="spx_50ma.png" alt="SPX 50MA" class="w-full h-auto border rounded">
+      </div>
+      <div>
+        <h2 class="text-lg font-semibold mb-1">% SPX über 200-Tage MA</h2>
+        <img src="spx_200ma.png" alt="SPX 200MA" class="w-full h-auto border rounded">
+      </div>
+    </div>
+
+    <!-- Ampel-Tabelle -->
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold mb-2">Indikatoren Ampelbewertung</h2>
+      <table class="min-w-full bg-white rounded shadow overflow-hidden">
+        <thead>
+          <tr>
+            <th class="px-4 py-2 border">Indikator</th>
+            <th class="px-4 py-2 border">Wert</th>
+            <th class="px-4 py-2 border">Bewertung</th>
+            <th class="px-4 py-2 border">Kriterien</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="px-4 py-2 border">VIX</td>
+            <td class="px-4 py-2 border">13.5</td>
+            <td class="px-4 py-2 border text-green-600 font-semibold">Grün</td>
+            <td class="px-4 py-2 border">Grün &lt; 15, Gelb 15-20, Rot &gt; 20</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border">Put/Call</td>
+            <td class="px-4 py-2 border">0.95</td>
+            <td class="px-4 py-2 border text-yellow-500 font-semibold">Gelb</td>
+            <td class="px-4 py-2 border">Grün &lt; 0.8, Gelb 0.8-1.1, Rot &gt; 1.1</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border">TRIN</td>
+            <td class="px-4 py-2 border">1.35</td>
+            <td class="px-4 py-2 border text-red-600 font-semibold">Rot</td>
+            <td class="px-4 py-2 border">Grün &lt; 1, Gelb 1-1.2, Rot &gt; 1.2</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border">NYSE TICK</td>
+            <td class="px-4 py-2 border">-800</td>
+            <td class="px-4 py-2 border text-red-600 font-semibold">Rot</td>
+            <td class="px-4 py-2 border">Grün &gt; 200, Gelb -200 bis 200, Rot &lt; -200</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border">% SPX > MA</td>
+            <td class="px-4 py-2 border">45%</td>
+            <td class="px-4 py-2 border text-yellow-500 font-semibold">Gelb</td>
+            <td class="px-4 py-2 border">Grün &gt; 60%, Gelb 40-60%, Rot &lt; 40%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
